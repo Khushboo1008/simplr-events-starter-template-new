@@ -38,7 +38,7 @@ const TicketFinal = ({ qrData }: { qrData: any }) => {
       },
     })
     const tokenId = tokenIdRes.data?.holders[0]?.tickets[0].tokenId
-    setTokenId(tokenId)
+    await setTokenId(tokenId)
     const res = await client.query({
       query: FETCH_REVEALED,
       variables: { address: CONTRACT_ADDRESS },
@@ -150,7 +150,7 @@ const TicketFinal = ({ qrData }: { qrData: any }) => {
       </div>
     )
   } else {
-    return <QRCodeComp {...{ qrData, tokenId }} />
+    if (tokenId != '') return <QRCodeComp {...{ qrData, tokenId }} />
   }
 }
 
