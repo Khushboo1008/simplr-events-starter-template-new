@@ -38,7 +38,7 @@ const checkQuery = (query: QueryProps): boolean => {
 const ClaimComponent = ({ query }: { query: QueryProps }) => {
   useEffect(() => {
     console.log('provider:', provider)
-    console.log('Network:', getNetwork().chainIdHex)
+    console.log('Network:', getNetwork().chainId)
   }, [])
 
   return (
