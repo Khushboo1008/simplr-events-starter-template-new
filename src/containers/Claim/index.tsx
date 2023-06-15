@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import {
   ARCANA_APP_ADDRESS,
   EVENT_LOGO,
@@ -22,8 +22,10 @@ const provider = new AuthProvider(`${ARCANA_APP_ADDRESS}`, {
   alwaysVisible: true,
   network: TEST_NETWORK ? 'testnet' : 'mainnet',
   chainConfig: {
-    chainId: getNetwork().chainIdHex,
-    rpcUrl: '',
+    chainId: getNetwork().chainId,
+    rpcUrl: TEST_NETWORK
+      ? 'https://rpc-mumbai.maticvigil.com/'
+      : 'https://polygon-rpc.com',
   },
 })
 
@@ -34,6 +36,11 @@ const checkQuery = (query: QueryProps): boolean => {
 }
 
 const ClaimComponent = ({ query }: { query: QueryProps }) => {
+  useEffect(() => {
+    console.log('provider:', provider)
+    console.log('Network:', getNetwork().chainIdHex)
+  }, [])
+
   return (
     <div
       className={`
