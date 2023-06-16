@@ -28,6 +28,31 @@ const TicketFinal = ({ qrData }: { qrData: any }) => {
   const [tokenId, setTokenId] = useState('')
   const [loading, setLoading] = useState(true)
   const auth = useAuth()
+  useEffect(() => {
+    if (tokenId) {
+      const setTicketDetails = async () => {
+        const res = await client.query({
+          query: FETCH_REVEALED,
+          variables: { address: CONTRACT_ADDRESS },
+        })
+        const { data } = res
+        const isRevealed = !!data?.simplrEvents?.[0]?.isRevealed
+        const ticketURI = data?.simplrEvents?.[0]?.ticketURI
+        const ticketCid = ticketURI?.split('//')[1]
+        const ticketImgRes = await axios.get(
+          `https://nftstorage.link/ipfs/${ticketCid}${
+            isRevealed ? `${tokenId}.json` : ''
+          }`,
+        )
+        const ticketImg = `https://nftstorage.link/ipfs/${
+          ticketImgRes.data?.image.split('//')[1]
+        }`
+        setTicketURI(ticketImg)
+        setRevealed(isRevealed)
+      }
+      setTicketDetails()
+    }
+  }, [tokenId])
 
   const fetchRevealed = async () => {
     const tokenIdRes = await client.query({
@@ -39,25 +64,6 @@ const TicketFinal = ({ qrData }: { qrData: any }) => {
     })
     const tokenId = tokenIdRes.data?.holders[0]?.tickets[0].tokenId
     setTokenId(tokenId)
-    const res = await client.query({
-      query: FETCH_REVEALED,
-      variables: { address: CONTRACT_ADDRESS },
-    })
-
-    const { data } = res
-    const isRevealed = !!data?.simplrEvents?.[0]?.isRevealed
-    const ticketURI = data?.simplrEvents?.[0]?.ticketURI
-    const ticketCid = ticketURI?.split('//')[1]
-    const ticketImgRes = await axios.get(
-      `https://nftstorage.link/ipfs/${ticketCid}${
-        isRevealed ? `${tokenId}.json` : ''
-      }`,
-    )
-    const ticketImg = `https://nftstorage.link/ipfs/${
-      ticketImgRes.data?.image.split('//')[1]
-    }`
-    setTicketURI(ticketImg)
-    setRevealed(isRevealed)
   }
 
   useEffect(() => {

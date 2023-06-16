@@ -29,10 +29,10 @@
     react-loader-spinner "^5.3.4"
     styled-components "^5.3.5"
 
-"@arcana/auth@^1.0.0":
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/@arcana/auth/-/auth-1.0.2.tgz#ce03785b9fd2b2ba4d5c8113286c45f78d170ce7"
-  integrity sha512-U+eZunnbMUmTLiJUNJtzicnehm8Lwu9IVIOoRB7NYoYl5ct7/gOWrE21xsMT7VHilJHW0tNZZJxmWHYX8XQPHw==
+"@arcana/auth@^1.0.4":
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/@arcana/auth/-/auth-1.0.4.tgz#ff1315531fcc042cc92c4f34ec15cc295c1e1206"
+  integrity sha512-1RFNdEMsYrt2IbMn+H6rP7mFJGwOBOAhqokhkSl5J+U/LJGvmLwk+/yFmDPAscHWa4u/ys9gpHN49yylMhorrw==
   dependencies:
     "@metamask/safe-event-emitter" "^2.0.0"
     eth-rpc-errors "^4.0.3"

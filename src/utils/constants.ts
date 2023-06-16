@@ -1,4 +1,3 @@
-import { CHAIN } from '@arcana/auth'
 import { CONTRACT_ADDRESS } from './constants_admin'
 export { CONTRACT_ADDRESS } from './constants_admin'
 
@@ -27,7 +26,6 @@ export const GELATO_API_KEY = process.env.NEXT_PUBLIC_GELATO_API_KEY
 export const TEST_NETWORK = toBoolean(process.env.NEXT_PUBLIC_TEST_NETWORK)
 
 export const getNetwork = (): {
-  chainIdHex: CHAIN
   chainId: string
   blockExplorer: string
   unit: string
@@ -36,7 +34,6 @@ export const getNetwork = (): {
   if (TEST_NETWORK) {
     return {
       name: 'mumbai',
-      chainIdHex: CHAIN.POLYGON_MUMBAI_TESTNET,
       chainId: '80001',
       blockExplorer: 'https://mumbai.polygonscan.com/',
       unit: 'MATIC',
@@ -44,7 +41,6 @@ export const getNetwork = (): {
   } else {
     return {
       name: 'matic',
-      chainIdHex: CHAIN.POLYGON_MAINNET,
       chainId: '137',
       blockExplorer: 'https://polygonscan.com/',
       unit: 'MATIC',
